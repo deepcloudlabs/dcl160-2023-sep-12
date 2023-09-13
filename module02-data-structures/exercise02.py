@@ -13,5 +13,3 @@ jack = ("jack shephard", "11111111110", "jack.shephard@example.com", 1982, 100_0
 salary = jack[-1]
 print(f"salary: {salary}")
 print(f"e-mail: {jack[2]}")
-
-
