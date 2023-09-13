@@ -1,6 +1,6 @@
 """
- 1) if / elif / else
+ 1) if / elif / else ✔
  2) loops:
-     i) regular loops: for -> tuple/list
+     i) regular loops: for -> tuple/list/str
     ii) irregular    : while -> conditions
 """
