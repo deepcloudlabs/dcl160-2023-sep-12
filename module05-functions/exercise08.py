@@ -1,4 +1,5 @@
 def en_kucuk(*values):
+    print(type(values))
     min_val = values[0]
     for val in values:
         if val < min_val:
