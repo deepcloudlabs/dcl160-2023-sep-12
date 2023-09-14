@@ -25,6 +25,7 @@ def create_secret(level):
             digits.append(digit)
     return int("".join([str(digit) for digit in digits]))
 
+
 # global variables
 game_level = 3
 secret = create_secret(game_level)
@@ -34,7 +35,23 @@ moves = 0
 
 
 def evaluate_move(guess, secret):
-    pass
+    perfect_match = 0
+    partial_match = 0
+    for i, digit_guess in enumerate(str(guess)):
+        for j, digit_secret in enumerate(str(secret)):
+            if digit_secret == digit_guess:
+                if i == j:
+                    perfect_match = perfect_match + 1
+                else:
+                    partial_match = partial_match + 1
+    if perfect_match == 0 and partial_match == 0:
+        return "No Match"
+    msg = ""
+    if partial_match > 0:
+        msg = f"-{partial_match}"
+    if perfect_match > 0:
+        msg = f"{msg}+{perfect_match}"
+    return msg
 
 
 while game_level <= 10:
@@ -42,17 +59,19 @@ while game_level <= 10:
     moves = moves + 1
     if guess == secret:
         print(f"You win the level {game_level}.")
-        game_level = game_level + 1
+        game_level += 1
         secret = create_secret(game_level)
+        lives += 1
+        max_moves += 2
         moves = 0
     elif moves > max_moves:
         print(f"You lose the level {game_level}.")
-        lives = lives - 1
+        lives -= 1
         if lives == 0:
             print(f"You lose the game.")
             break
         secret = create_secret(game_level)
         moves = 0
     else:
-        message = evaluate_move(guess,secret)
+        message = evaluate_move(guess, secret)
         print(f"Guess: {guess}, Message: {message}")
