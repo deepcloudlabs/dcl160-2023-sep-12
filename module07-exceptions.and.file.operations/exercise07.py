@@ -1,3 +1,5 @@
+import json
+
 employees = [
     ("jack shephard", "Sales", 100000, 1978, True),
     ("kate austen", "IT", 200000, 1985, False),
@@ -7,6 +9,6 @@ employees = [
     ("sun kwon", "IT", 170000, 1984, False),
     ("hugo reyes", "IT", 120000, 1992, True)
 ]
-with open("employees.txt", mode="wt") as myfile:
-    for full_name, department, salary, birth_year, full_time in employees:
-        myfile.write(f"{full_name},{department},{salary},{birth_year},{full_time}\n")
+# json: text i/o, bson: binary i/0
+with open("employees.json", mode="wt") as myfile:
+    json.dump(employees, myfile)
