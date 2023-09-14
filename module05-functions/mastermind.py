@@ -25,18 +25,34 @@ def create_secret(level):
             digits.append(digit)
     return int("".join([str(digit) for digit in digits]))
 
-def play(guess):
-    return 123
-
 # global variables
 game_level = 3
 secret = create_secret(game_level)
 max_moves = 10
 lives = 3
+moves = 0
 
-"""
+
+def evaluate_move(guess, secret):
+    pass
+
+
 while game_level <= 10:
     guess = int(input("Guess: "))
-    play(guess)
-"""
-print(create_secret(3))
+    moves = moves + 1
+    if guess == secret:
+        print(f"You win the level {game_level}.")
+        game_level = game_level + 1
+        secret = create_secret(game_level)
+        moves = 0
+    elif moves > max_moves:
+        print(f"You lose the level {game_level}.")
+        lives = lives - 1
+        if lives == 0:
+            print(f"You lose the game.")
+            break
+        secret = create_secret(game_level)
+        moves = 0
+    else:
+        message = evaluate_move(guess,secret)
+        print(f"Guess: {guess}, Message: {message}")
