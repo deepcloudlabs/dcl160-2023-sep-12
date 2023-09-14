@@ -14,5 +14,16 @@ to_population = lambda country : country["population"]
 if_asian = lambda country : country["continent"] == "Asia"
 world_population = reduce(accumulate, map(to_population, countries))
 asian_population = reduce(accumulate,map(to_population,filter(if_asian,countries)))
+def groupByContinent(continent_populations,tp):
+    cont = tp[0]
+    population = tp[1]
+    if cont not in continent_populations:
+        continent_populations[cont] = 0
+    continent_populations[cont] += population
+    return continent_populations
+
+
+total_population = reduce(groupByContinent, map(lambda country : (country["continent"],country["population"]),countries), {})
 print(world_population)
 print(asian_population)
+print(total_population)
