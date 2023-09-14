@@ -12,18 +12,25 @@ print(continents)
 accumulate = lambda acc,population: acc+population
 to_population = lambda country : country["population"]
 if_asian = lambda country : country["continent"] == "Asia"
+if_antarctica = lambda country : country["continent"].lower() == "antarctica"
 world_population = reduce(accumulate, map(to_population, countries))
 asian_population = reduce(accumulate,map(to_population,filter(if_asian,countries)))
 def groupByContinent(continent_populations,tp):
     cont = tp[0]
     population = tp[1]
+    print(f"groupByContinent({cont})")
     if cont not in continent_populations:
         continent_populations[cont] = 0
     continent_populations[cont] += population
     return continent_populations
 
+def map2continent(country):
+    print(f"map2continent({country['name']})")
+    return (country["continent"],country["population"])
 
-total_population = reduce(groupByContinent, map(lambda country : (country["continent"],country["population"]),countries), {})
+to_continent = lambda country : (country["continent"],country["population"])
+total_population = reduce(groupByContinent, map(map2continent,countries), {})
 print(world_population)
 print(asian_population)
 print(total_population)
+print(all(map(lambda country : country["population"] == 0, filter(if_antarctica, countries))))
