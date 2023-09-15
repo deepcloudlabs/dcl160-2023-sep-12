@@ -30,19 +30,31 @@ class Account:
         self.balance = balance
         self.status = status
 
+    # business method
     def deposit(self, amount):
         if amount <= 0:
             raise ValueError("You must provide a positive amount to deposit")
         self.balance += amount
 
+    # business method
     def withdraw(self, amount):
+        # validation
         if amount <= 0:
             raise ValueError("You must provide a positive amount to withdraw")
+        # business rule
         if amount > self.balance:
             deficit = amount - self.balance
             raise InsufficientBalanceError("Your balance does not cover your expenses", deficit)
+        self.balance -= amount
 
 
 # an object is created!
 acc1 = Account("tr1", 1_000_000)
 acc2 = Account("tr2", 2_000_000)
+try:
+    acc1.deposit(50_000)
+    acc1.deposit(25_000)
+    acc2.withdraw(75_000)
+    acc2.withdraw(10_000_000)
+except InsufficientBalanceError as e:
+    print(e.message, e.deficit)
