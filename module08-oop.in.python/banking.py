@@ -16,7 +16,17 @@ class InsufficientBalanceError(Exception):
         return f"InsufficientBalanceError [message: {self.message}, deficit: {self.deficit}]"
 
 
-class Account:
+class Withdrawable:
+    def withdraw(self, amount):
+        pass
+
+
+class Depositable:
+    def deposit(self, amount):
+        pass
+
+
+class Account(Withdrawable, Depositable):
     """
     Account is a class.
     Members: i) attributes ii) methods: constructor (__init__)
@@ -116,6 +126,6 @@ try:
     # acc2.balance = acc1.balance - 100_000_000
     print(f"acc1's balance: {acc1.balance}")
     print(f"acc1: {acc1}")
-    acc1.withdraw(1)
+    acc1.withdraw(1)  # withdraw(reference of acc1, 1)
 except InsufficientBalanceError as e:
     print(e)
