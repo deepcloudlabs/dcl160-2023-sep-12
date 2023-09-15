@@ -55,6 +55,8 @@ try:
     acc1.deposit(50_000)
     acc1.deposit(25_000)
     acc2.withdraw(75_000)
-    acc2.withdraw(10_000_000)
+    # acc2.withdraw(10_000_000)
+    acc2.balance = acc1.balance - 10_000_000
+    print(f"acc2's balance: {acc2.balance}")
 except InsufficientBalanceError as e:
     print(e.message, e.deficit)
